@@ -1,25 +1,49 @@
 .home {
   max-width: 960px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
 }
 
 .hero {
+  position: relative;
   background: url('/hero-placeholder.jpg') center/cover no-repeat;
-  color: white;
-  padding: 4rem 2rem;
-  text-align: center;
-}
-
-.links {
+  height: 80vh;
   display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.link-card {
-  flex: 1;
-  padding: 1rem;
-  border: 1px solid #ccc;
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 45, 98, 0.6);
+}
+
+.hero-content {
+  position: relative;
   text-align: center;
+  color: #fff;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  background-color: #002D62;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 200ms;
+}
+
+.cta:hover {
+  background-color: #001F4C;
 }

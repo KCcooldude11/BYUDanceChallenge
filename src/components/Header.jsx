@@ -1,21 +1,27 @@
-import { Link } from 'react-router-dom'
-import './Header.css'
+import { Link } from 'react-router-dom';
+import './Header.css';
 
 function Header() {
+  const links = [
+    { to: '/about', title: 'Faculty' },
+    { to: '/programs', title: 'Programs' },
+    { to: '/audition', title: 'Auditions' },
+  ];
+
   return (
     <header className="header">
       <div className="header-inner">
-        <h1 className="logo">BYU Dance</h1>
         <nav>
           <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/audition">Audition</Link></li>
+            <li><Link to="/" className="nav-link">Home</Link></li>
+            <li><Link to="/about" className="nav-link">Faculty</Link></li>
+            <li><Link to="/programs" className="nav-link">Programs</Link></li>
+            <li><Link to="/audition" className="nav-link">Auditions</Link></li>
           </ul>
         </nav>
       </div>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;
