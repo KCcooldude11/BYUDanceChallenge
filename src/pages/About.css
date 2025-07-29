@@ -1,0 +1,24 @@
+.about {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.faculty-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.faculty-card {
+  flex: 1 1 calc(33% - 1rem);
+  border: 1px solid #ccc;
+  padding: 1rem;
+  text-align: center;
+}
+
+.faculty-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

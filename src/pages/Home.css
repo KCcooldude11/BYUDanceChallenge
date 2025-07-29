@@ -1,0 +1,25 @@
+.home {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero {
+  background: url('/hero-placeholder.jpg') center/cover no-repeat;
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.link-card {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
