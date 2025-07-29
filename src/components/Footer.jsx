@@ -1,8 +1,3 @@
-omponents/Footer.jsx
-New
-+13
--0
-
 import './Footer.css'
 
 function Footer() {
