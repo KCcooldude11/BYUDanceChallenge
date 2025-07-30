@@ -110,6 +110,12 @@
   /* subtle drop shadow */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   white-space: nowrap;
+  text-decoration: none;   /* kill the underline */
+  cursor: pointer;
+}
+.section-title:hover,
+.section-title:focus {
+  text-decoration: none;   /* make extra sure it never underlines */
 }
 /* HERO GUTTER CARDS: FIXED rather than absolute */
 .hero-gutter {
@@ -123,11 +129,12 @@
 
 /* LEFT GUTTER: two positions */
 .hero-gutter.gutter-left.top {
-  top: 15%;
+  top: 75%;
   left: 1rem;
+  transform: translateY(-80%);
 }
 .hero-gutter.gutter-left.bottom {
-  bottom: 15%;
+  bottom: 80%;
   left: 1rem;
 }
 
@@ -135,7 +142,17 @@
 .hero-gutter.gutter-right.center {
   top: 50%;
   right: 1rem;
+  transform: translateY(80%);
+}
+.hero-gutter.gutter-right.top {
+  top: 50%;
+  right: 1rem;
   transform: translateY(-50%);
+}
+.hero-gutter.gutter-right.bottom {
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-190%);
 }
 
 /* NAVIGATE OUT the old "absolute" rules */
@@ -164,4 +181,26 @@
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
+}
+
+.scroll-up {
+  position: fixed;
+  top: 3rem;                 /* distance down from the very top */
+  left: 50%;                 /* center horizontally */
+  transform: translateX(-50%);/* exact centering */
+  width: 3rem;
+  height: 3rem;
+  background: #fff;
+  color: rgba(0, 45, 98, 0.85);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 20;
+  transition: opacity 0.2s;
+  opacity: 50%;
+}
+.scroll-up:hover {
+  opacity: 1;
 }

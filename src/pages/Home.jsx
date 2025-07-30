@@ -1,5 +1,5 @@
-// src/pages/Home.jsx
 import React, { useRef, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import './Home.css'
 
 import img1 from '../assets/ByuContemporary.jpg'
@@ -12,32 +12,33 @@ import heroVideo from '../assets/ByuBallroomVideo.mp4'
 export default function Home() {
   const firstSectionRef = useRef(null)
   const [showGutters, setShowGutters] = useState(true)
+  const [showScrollUp, setShowScrollUp] = useState(false)
 
-  // 1) Click "Explore Programs" → hide gutters immediately + smooth‑scroll
+  // 1) Click “Explore Programs” → hide gutters + scroll to first image
   const scrollToFirst = () => {
     setShowGutters(false)
     firstSectionRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  // 2) On mount, add a one‑time scroll listener:
-  //    once you scroll beyond half a viewport, hide gutters and remove listener.
+  // 2) On scroll → fade gutters and toggle scroll‑up button
   useEffect(() => {
+    const threshold = window.innerHeight / 2
     const onScroll = () => {
-      if (window.scrollY > window.innerHeight / 2) {
-        setShowGutters(false)
-        window.removeEventListener('scroll', onScroll)
-      }
+      const y = window.scrollY
+      setShowGutters(y < threshold)
+      setShowScrollUp(y > threshold)
     }
     window.addEventListener('scroll', onScroll)
+    onScroll() // initialize right away
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const sections = [
-    { src: img1, title: 'Contemporary',    bg: 'rgba(70, 130, 180, 0.75)' },
-    { src: img2, title: 'Ballroom',        bg: 'rgba(218, 165, 32, 0.75)' },
-    { src: img3, title: 'Cultural',        bg: 'rgba(255, 140, 0, 0.75)' },
-    { src: img4, title: 'Ballet',          bg: 'rgba(219, 112, 147, 0.75)' },
-    { src: img5, title: 'Music & Theatre', bg: 'rgba(72, 61, 139, 0.75)' },
+    { src: img1, title: 'Contemporary',    bg: 'rgb(36, 35, 33)' },
+    { src: img2, title: 'Ballroom',        bg: 'rgb(159, 173, 254)' },
+    { src: img3, title: 'Cultural',        bg: 'rgb(180, 4, 44)' },
+    { src: img4, title: 'Ballet',          bg: 'rgb(176, 141, 73)' },
+    { src: img5, title: 'Music & Theatre', bg: 'rgb(5, 47, 176)' },
   ]
 
   return (
@@ -59,38 +60,9 @@ export default function Home() {
           <p>Where creativity meets performance</p>
           <button onClick={scrollToFirst} className="cta">
             <span className="cta-text">Explore Programs</span>
-            <span className="cta-arrow">↓</span>
           </button>
         </div>
 
-        {/* ==== GUTTER CARDS (in DOM but will fade) ==== */}
-        <div className={`hero-gutter gutter-left top ${!showGutters ? 'fade-out' : ''}`}>
-          <div className="info-card">
-            <h3>Degrees</h3>
-            <p>
-              With 4 majors and 4 minors to choose from, there’s a dance
-              program for you at BYU.
-            </p>
-          </div>
-        </div>
-        <div className={`hero-gutter gutter-left bottom ${!showGutters ? 'fade-out' : ''}`}>
-          <div className="info-card">
-            <h3>Auditions</h3>
-            <p>
-              Already applied for BYU? Get details on how to prepare for
-              your dance audition.
-            </p>
-          </div>
-        </div>
-        <div className={`hero-gutter gutter-right center ${!showGutters ? 'fade-out' : ''}`}>
-          <div className="info-card">
-            <h3>Grants &amp; Scholarships</h3>
-            <p>
-              Find academically and merit‑based opportunities to fund your
-              dance education.
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* ==== PARALLAX SECTIONS ==== */}
@@ -101,11 +73,26 @@ export default function Home() {
           className="parallax"
           style={{ backgroundImage: `url(${src})` }}
         >
-          <div className="section-title" style={{ background: bg }}>
-            {title}
-          </div>
+          <Link
+      to={`/programs?selected=${encodeURIComponent(title)}`}
+      className="section-title"
+      style={{ background: bg }}
+    >
+      {title}
+    </Link>
         </section>
       ))}
+
+      {/* ==== BACK‑TO‑TOP BUTTON ==== */}
+      {showScrollUp && (
+        <button
+          className="scroll-up"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Back to top"
+        >
+          ^
+        </button>
+      )}
     </main>
   )
 }
